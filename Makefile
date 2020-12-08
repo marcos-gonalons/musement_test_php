@@ -5,6 +5,9 @@ build:
 	docker build -t $(IMAGE_NAME) .
 	docker run --name $(CONTAINER_NAME) $(IMAGE_NAME) composer install
 
+phpstan:
+	vendor/bin/phpstan --level=8 analyse src/
+
 run:
 	@docker commit $(CONTAINER_NAME) $(IMAGE_NAME)-tmp 1> /dev/null
 	@-docker run --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php bin/console app:get-forecasts"
