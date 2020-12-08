@@ -8,16 +8,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ForecastCommand extends Command
 {
-    // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:get-forecasts';
 
-    protected function configure(): void
+    protected static $defaultName = "app:get-forecasts";
+
+
+    protected function configure()
     {
-        // ...
+        $this->setDescription("Prints the list of cities with the weather forecast for today and tomorrow");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
         // ... put here the code to create the user
 
         // this method must return an integer number with the "exit status code"
