@@ -11,7 +11,7 @@ class ForecastCommand extends Command
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:get-forecasts';
 
-    protected function configure()
+    protected function configure(): void
     {
         // ...
     }
