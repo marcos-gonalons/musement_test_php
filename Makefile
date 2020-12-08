@@ -7,7 +7,7 @@ build:
 
 run:
 	@docker commit $(CONTAINER_NAME) $(IMAGE_NAME)-tmp 1> /dev/null
-	@-docker run --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php -v"
+	@-docker run --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php bin/console app:get-forecasts"
 	@-docker rmi -f $(IMAGE_NAME)-tmp 1> /dev/null
 	@-docker container rm $(CONTAINER_NAME)-tmp 1> /dev/null
 

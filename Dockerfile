@@ -8,7 +8,7 @@ RUN apt-get update -y; \
     apt-get update -y; \
     apt-get install php8.0 -y;
 
-# PHP Extensions
+# Install PHP Extensions
 RUN apt-get -y install php8.0-xml;
 
 # Install composer
