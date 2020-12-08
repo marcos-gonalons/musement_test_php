@@ -11,5 +11,11 @@ run:
 	@-docker rmi -f $(IMAGE_NAME)-tmp 1> /dev/null
 	@-docker container rm $(CONTAINER_NAME)-tmp 1> /dev/null
 
+sniff:
+	vendor/bin/phpcs --standard=PSR12 src/
+
+sniff-fix:
+	vendor/bin/phpcbf --standard=PSR12 src/
+
 tests:
 	echo "run app tests here"
