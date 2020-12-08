@@ -1,9 +1,5 @@
 FROM debian
 
-COPY ./src /app
-
-WORKDIR /app
-
 # Install PHP 8
 RUN apt-get update -y; \
     apt-get -y install lsb-release apt-transport-https ca-certificates wget; \
@@ -12,9 +8,11 @@ RUN apt-get update -y; \
     apt-get update -y; \
     apt-get install php8.0 -y;
 
+# PHP Extensions
+RUN apt-get -y install php8.0-xml;
+
 # Install composer
-RUN \
-    echo '- Installing composer ...' && \
+RUN echo '- Installing composer ...' && \
     EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
     ACTUAL_SIGNATURE="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"; \
