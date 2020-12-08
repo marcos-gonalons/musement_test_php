@@ -20,3 +20,8 @@ RUN echo '- Installing composer ...' && \
     php composer-setup.php --quiet --install-dir=/bin --filename=composer && \
     composer --version && \
     rm composer-setup.php;
+
+
+COPY . /app
+
+WORKDIR /app
