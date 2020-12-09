@@ -11,6 +11,9 @@ RUN apt-get update -y; \
 # Install PHP Extensions
 RUN apt-get -y install php8.0-xml;
 
+# Install git, needed by some composer dependencies
+RUN apt-get -y install git-all
+
 # Install composer
 RUN echo '- Installing composer ...' && \
     EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"; \
