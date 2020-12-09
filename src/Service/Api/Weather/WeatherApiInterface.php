@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Service\Api\Weather\WeatherApi;
+namespace App\Service\Api\Weather;
 
 interface WeatherApiInterface
 {

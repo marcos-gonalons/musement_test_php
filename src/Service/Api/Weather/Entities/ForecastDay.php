@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Service\Api\Weather\Entities;
+namespace App\Service\Api\Weather\Entities;
 
 class ForecastDay
 {

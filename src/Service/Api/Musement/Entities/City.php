@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Service\Api\Musement\CitiesApi\Entities;
+namespace App\Service\Api\Musement\CitiesApi\Entities;
 
 class City
 {

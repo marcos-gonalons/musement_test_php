@@ -21,5 +21,18 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+
+    # Autowiring interfaces
+    App\Service\Forecast\ForecastServiceInterface: '@App\Service\Forecast\ForecastService'
+    App\Service\Api\Musement\CitiesApiInterface: '@App\Service\Api\Musement\CitiesApi'
+    App\Service\Api\Weather\WeatherApiInterface: '@App\Service\Api\Weather\WeatherApi'
+
+    # Explicit service definitions for manually wiring arguments
+    App\Service\Api\Musement\CitiesApi:
+        arguments:
+            - '%env(CITIES_API_URL)%'
+            - '@GuzzleHttp.Client'
+
+    # Vendor services
+    GuzzleHttp.Client:
+        class: 'GuzzleHttp\Client'

@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Service\Api\Musement\CitiesApi;
+namespace App\Service\Api\Musement;
 
-use Src\Service\Api\Musement\CitiesApi\Entities\City;
+use App\Service\Api\Musement\CitiesApi\Entities\City;
 
 interface CitiesApiInterface
 {
