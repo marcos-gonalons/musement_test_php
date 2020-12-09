@@ -4,6 +4,7 @@ namespace Src\Service\Api\Musement\CitiesApi\Entities;
 
 class Country
 {
+
     private int $id;
     private string $name;
     private string $isoCode;
