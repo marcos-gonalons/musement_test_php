@@ -12,7 +12,7 @@ class ForecastCommand extends Command
     protected static $defaultName = "app:get-forecasts";
 
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription("Prints the list of cities with the weather forecast for today and tomorrow");
     }

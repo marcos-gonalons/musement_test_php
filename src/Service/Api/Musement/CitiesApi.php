@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Api\CitiesApi;
+namespace Src\Service\Api\Musement\CitiesApi;
 
 class CitiesApi implements CitiesApiInterface
 {
