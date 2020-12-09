@@ -6,15 +6,14 @@ class Weather
 {
 
     private Location $location;
-    private Forecast $forecastDay;
-
+    private Forecast $forecast;
 
     public function getLocation(): Location
     {
         return $this->location;
     }
 
-    public function setLocation(int $location): Weather
+    public function setLocation(Location $location): Weather
     {
         $this->location = $location;
         return $this;

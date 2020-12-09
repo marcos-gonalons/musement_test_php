@@ -33,6 +33,12 @@ services:
             - '%env(CITIES_API_URL)%'
             - '@GuzzleHttp.Client'
 
+    App\Service\Api\Weather\WeatherApi:
+        arguments:
+            - '%env(WEATHER_API_KEY)%'
+            - '%env(WEATHER_API_URL)%'
+            - '@GuzzleHttp.Client'
+
     # Vendor services
     GuzzleHttp.Client:
         class: 'GuzzleHttp\Client'

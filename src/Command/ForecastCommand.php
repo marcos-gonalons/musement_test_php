@@ -30,8 +30,7 @@ class ForecastCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $forecasts = $this->forecastService->getAllForecasts();
-            var_dump($forecasts);
+            $this->forecastService->processForecasts($output);
             return Command::SUCCESS;
         } catch (\Throwable $e) {
             $output->writeln("An error occurred -> " . $e->getMessage());
