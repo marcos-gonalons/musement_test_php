@@ -5,6 +5,7 @@ namespace App\Service\Api\Weather;
 use App\Service\Api\Musement\Entities\City;
 use App\Service\Api\Weather\Entities\Weather;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Utils;
 use Symfony\Component\HttpFoundation\Response;
 
 class WeatherApi implements WeatherApiInterface
@@ -35,7 +36,7 @@ class WeatherApi implements WeatherApiInterface
         }
 
         try {
-            $decodedBody = json_decode($response->getBody()->getContents());
+            $decodedBody = Utils::jsonDecode($response->getBody()->getContents());
 
             $mapper = new \JsonMapper();
             $weather = new Weather();

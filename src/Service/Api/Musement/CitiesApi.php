@@ -4,6 +4,7 @@ namespace App\Service\Api\Musement;
 
 use GuzzleHttp\ClientInterface;
 use App\Service\Api\Musement\Entities\City;
+use GuzzleHttp\Utils;
 use Symfony\Component\HttpFoundation\Response;
 
 class CitiesApi implements CitiesApiInterface
@@ -31,7 +32,7 @@ class CitiesApi implements CitiesApiInterface
         }
 
         try {
-            $decodedBody = json_decode($response->getBody()->getContents());
+            $decodedBody = Utils::jsonDecode($response->getBody()->getContents());
 
             $cities = [];
             $mapper = new \JsonMapper();

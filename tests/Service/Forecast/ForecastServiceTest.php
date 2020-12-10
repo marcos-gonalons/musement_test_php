@@ -12,7 +12,6 @@ use App\Service\Api\Weather\Entities\Location;
 use App\Service\Api\Weather\Entities\Weather;
 use App\Service\Api\Weather\WeatherApiInterface;
 use App\Service\Forecast\ForecastService;
-use Locale;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument\Token\AnyValuesToken;
 use Prophecy\Argument\Token\IdenticalValueToken;
