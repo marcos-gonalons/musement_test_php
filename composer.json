@@ -17,7 +17,8 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.59",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "symfony/phpunit-bridge": "^5.2"
     },
     "config": {
         "optimize-autoloader": true,
