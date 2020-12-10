@@ -3,7 +3,9 @@ CONTAINER_NAME = mgonalons-musement-test-container
 
 build:
 	docker build -t $(IMAGE_NAME) .
-	docker run --name $(CONTAINER_NAME) $(IMAGE_NAME) composer install
+	composer install
+	./bin/phpunit
+	docker create --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 cleanup-tmp-container:
 	@-docker rmi -f $(IMAGE_NAME)-tmp 1> /dev/null
@@ -30,4 +32,4 @@ _sniff-fix:
 
 tests: create-tmp-container _tests cleanup-tmp-container
 _tests:
-	@-docker run --mount type=bind,source="$(shell pwd)",target=/app --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php -v"
+	@-docker run --mount type=bind,source="$(shell pwd)",target=/app --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "./bin/phpunit"
