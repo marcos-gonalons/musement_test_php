@@ -3,13 +3,11 @@
 namespace App\Service\Api\Weather;
 
 use App\Service\Api\Musement\CitiesApi\Entities\City;
-use App\Service\Api\Weather\Entities\Day;
 use App\Service\Api\Weather\Entities\ForecastDay;
 use App\Service\Api\Weather\Entities\Weather;
 use Symfony\Component\HttpFoundation\Response;
 
 use GuzzleHttp\ClientInterface;
-
 
 class WeatherApi implements WeatherApiInterface
 {
@@ -57,10 +55,7 @@ class WeatherApi implements WeatherApiInterface
         } catch (\Throwable $e) {
             throw new \Exception("An error happened while mapping the response body -> " . $e->getMessage());
         }
-
-        return new Weather();
     }
-
 
     private function getQueryString(City $city, int $days): string
     {
