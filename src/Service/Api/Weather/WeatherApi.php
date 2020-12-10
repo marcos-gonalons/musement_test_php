@@ -42,14 +42,6 @@ class WeatherApi implements WeatherApiInterface
             $weather = new Weather();
             $mapper->map($decodedBody, $weather);
 
-            $forecastDays = [];
-            foreach ($weather->getForecast()->getForecastDay() as $day) {
-                $forecastDay = new ForecastDay();
-                $mapper->map($day, $forecastDay);
-                $forecastDays[] = $forecastDay;
-            }
-            $weather->getForecast()->setForecastDay($forecastDays);
-
             return $weather;
         } catch (\Throwable $e) {
             throw new \Exception("An error happened while mapping the response body -> " . $e->getMessage());
