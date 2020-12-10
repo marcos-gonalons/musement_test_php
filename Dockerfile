@@ -10,7 +10,10 @@ RUN apt-get update -y; \
 
 # Install PHP Extensions
 RUN apt-get -y install php8.0-xml; \
-    apt-get -y install php8.0-mbstring;
+    apt-get -y install php8.0-mbstring; \
+    apt-get -y install php8.0-zip; \
+    apt-get -y install zip; \
+    apt-get -y install unzip;
 
 # Install git, needed by some composer dependencies
 RUN apt-get -y install git-all
