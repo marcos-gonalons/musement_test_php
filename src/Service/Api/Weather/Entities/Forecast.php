@@ -15,6 +15,7 @@ class Forecast
         return $this->forecastDay;
     }
 
+    /** @param ForecastDay[] $forecastDay */
     public function setForecastDay(array $forecastDay): Forecast
     {
         $this->forecastDay = $forecastDay;

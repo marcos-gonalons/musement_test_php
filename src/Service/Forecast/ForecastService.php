@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ForecastService implements ForecastServiceInterface
 {
 
-    const FORECAST_DAYS = 2;
+    private const FORECAST_DAYS = 2;
 
     private CitiesApiInterface $citiesApi;
     private WeatherApiInterface $weatherApi;
