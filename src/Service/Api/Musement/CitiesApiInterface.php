@@ -2,7 +2,7 @@
 
 namespace App\Service\Api\Musement;
 
-use App\Service\Api\Musement\CitiesApi\Entities\City;
+use App\Service\Api\Musement\Entities\City;
 
 interface CitiesApiInterface
 {

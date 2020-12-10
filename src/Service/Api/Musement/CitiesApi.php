@@ -3,7 +3,7 @@
 namespace App\Service\Api\Musement;
 
 use GuzzleHttp\ClientInterface;
-use App\Service\Api\Musement\CitiesApi\Entities\City;
+use App\Service\Api\Musement\Entities\City;
 use Symfony\Component\HttpFoundation\Response;
 
 class CitiesApi implements CitiesApiInterface

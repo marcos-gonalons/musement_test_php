@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Api\Musement\CitiesApi\Entities;
+namespace App\Service\Api\Musement\Entities;
 
 class Country
 {

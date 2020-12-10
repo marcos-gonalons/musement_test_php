@@ -2,7 +2,7 @@
 
 namespace App\Service\Api\Weather;
 
-use App\Service\Api\Musement\CitiesApi\Entities\City;
+use App\Service\Api\Musement\Entities\City;
 use App\Service\Api\Weather\Entities\Weather;
 
 interface WeatherApiInterface

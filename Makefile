@@ -19,7 +19,7 @@ _phpstan:
 
 run: create-tmp-container _run cleanup-tmp-container
 _run:
-	docker run --mount type=bind,source="$(shell pwd)",target=/app --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php bin/console 'app:get-forecasts'"
+	-docker run --mount type=bind,source="$(shell pwd)",target=/app --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php bin/console 'app:get-forecasts'"
 
 sniff: create-tmp-container _sniff cleanup-tmp-container
 _sniff:
