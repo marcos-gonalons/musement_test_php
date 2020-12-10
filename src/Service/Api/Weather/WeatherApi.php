@@ -3,7 +3,6 @@
 namespace App\Service\Api\Weather;
 
 use App\Service\Api\Musement\CitiesApi\Entities\City;
-use App\Service\Api\Weather\Entities\ForecastDay;
 use App\Service\Api\Weather\Entities\Weather;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\Response;
