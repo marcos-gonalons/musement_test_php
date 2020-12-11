@@ -12,6 +12,7 @@ RUN apt-get update -y; \
 RUN apt-get -y install php8.0-xml; \
     apt-get -y install php8.0-mbstring; \
     apt-get -y install php8.0-zip; \
+    apt-get -y install php8.0-xdebug; \
     apt-get -y install zip; \
     apt-get -y install unzip;
 

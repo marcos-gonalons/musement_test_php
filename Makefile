@@ -32,3 +32,7 @@ _sniff-fix:
 tests: create-tmp-container _tests cleanup-tmp-container
 _tests:
 	@-docker run --mount type=bind,source="$(shell pwd)",target=/app --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "vendor/bin/phpunit"
+
+tests-coverage: create-tmp-container _tests-coverage cleanup-tmp-container
+_tests-coverage:
+	@-docker run --mount type=bind,source="$(shell pwd)",target=/app --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "vendor/bin/phpunit --coverage-text"
