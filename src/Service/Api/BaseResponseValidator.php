@@ -7,7 +7,7 @@ use Throwable;
 class BaseResponseValidator implements BaseResponseValidatorInterface
 {
 
-    protected ?Throwable $validationError;
+    protected ?Throwable $validationError = null;
 
     public function getValidationError(): ?Throwable
     {

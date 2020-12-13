@@ -3,7 +3,6 @@
 namespace App\Service\Api\Weather\ResponseValidator;
 
 use App\Service\Api\BaseResponseValidator;
-use App\Service\Api\Weather\Entities\Forecast;
 use App\Service\Api\Weather\Entities\Weather;
 
 class ResponseValidator extends BaseResponseValidator implements ResponseValidatorInterface
@@ -38,7 +37,7 @@ class ResponseValidator extends BaseResponseValidator implements ResponseValidat
             }
             if ($forecastDay->getDay()->getCondition()->getText() === null) {
                 $this->validationError = new \Exception("" .
-                    "Condition object at position $index of the forecast days array is emtpy." .
+                    "Condition object at position $index of the forecast days array is empty." .
                     "");
                 return false;
             }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Service\Api\Musement;
+namespace App\Tests\Service\Api\Musement\CitiesAPI;
 
 use App\Service\Api\Musement\CitiesAPI\CitiesApi;
 use App\Service\Api\Musement\CitiesAPI\ResponseValidator\ResponseValidatorInterface;
@@ -77,6 +77,90 @@ class CitiesApiTest extends TestCase
             $this->assertTrue(false);
         } catch (\Throwable $e) {
             $this->assertEquals("An error happened while mapping the response body -> json_decode error: Syntax error", $e->getMessage());
+        }
+    }
+
+
+    public function testGetCitiesErrorWhileValidatingResponse()
+    {
+        $apiService = $this->getCitiesApiInstance();
+
+        $responseMock = $this->prophesize(ResponseInterface::class);
+        $responseMock->getStatusCode(
+            new AnyValuesToken()
+        )->willReturn(200);
+
+        $responseBodyMock = $this->prophesize(StreamInterface::class);
+        $responseBodyMock->getContents(
+            new AnyValuesToken()
+        )->willReturn($this->getCitiesResponseString());
+        $responseMock->getBody(
+            new AnyValuesToken()
+        )->willReturn($responseBodyMock);
+
+        $this->httpClientMock->request(
+            new IdenticalValueToken("GET"),
+            new IdenticalValueToken($this->apiUrl),
+        )->willReturn($responseMock->reveal());
+
+        $this->responseValidatorMock->areCitiesOK(
+            new AnyValuesToken()
+        )->willReturn(false);
+
+        $validationException = new \Exception("Test error");
+        $this->responseValidatorMock->getValidationError(
+            new AnyValuesToken()
+        )->willReturn($validationException);
+
+        try {
+            $apiService->getCities();
+
+            // Should never execute this
+            $this->assertTrue(false);
+        } catch (\Throwable $e) {
+            $this->assertEquals("An error happened while mapping the response body -> Test error", $e->getMessage());
+        }
+    }
+
+
+
+    public function testGetCitiesUnknownErrorWhileValidatingResponse()
+    {
+        $apiService = $this->getCitiesApiInstance();
+
+        $responseMock = $this->prophesize(ResponseInterface::class);
+        $responseMock->getStatusCode(
+            new AnyValuesToken()
+        )->willReturn(200);
+
+        $responseBodyMock = $this->prophesize(StreamInterface::class);
+        $responseBodyMock->getContents(
+            new AnyValuesToken()
+        )->willReturn($this->getCitiesResponseString());
+        $responseMock->getBody(
+            new AnyValuesToken()
+        )->willReturn($responseBodyMock);
+
+        $this->httpClientMock->request(
+            new IdenticalValueToken("GET"),
+            new IdenticalValueToken($this->apiUrl),
+        )->willReturn($responseMock->reveal());
+
+        $this->responseValidatorMock->areCitiesOK(
+            new AnyValuesToken()
+        )->willReturn(false);
+
+        $this->responseValidatorMock->getValidationError(
+            new AnyValuesToken()
+        )->willReturn(null);
+
+        try {
+            $apiService->getCities();
+
+            // Should never execute this
+            $this->assertTrue(false);
+        } catch (\Throwable $e) {
+            $this->assertEquals("An error happened while mapping the response body -> Unknown error when validating the get cities response.", $e->getMessage());
         }
     }
 

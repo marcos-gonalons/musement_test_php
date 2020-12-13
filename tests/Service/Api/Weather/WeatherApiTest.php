@@ -88,6 +88,110 @@ class WeatherApiTest extends TestCase
     }
 
 
+    public function testGetWeatherErrorWhileValidatingResponse()
+    {
+
+        $apiService = $this->getWeatherApiInstance();
+
+        $responseMock = $this->prophesize(ResponseInterface::class);
+        $responseMock->getStatusCode(
+            new AnyValuesToken()
+        )->willReturn(200);
+
+        $responseBodyMock = $this->prophesize(StreamInterface::class);
+        $responseBodyMock->getContents(
+            new AnyValuesToken()
+        )->willReturn($this->getWeatherResponseString());
+        $responseMock->getBody(
+            new AnyValuesToken()
+        )->willReturn($responseBodyMock);
+
+        $this->httpClientMock->request(
+            new IdenticalValueToken("GET"),
+            new IdenticalValueToken("dummy-url?key=dummy-key&q=1.2%2C3.4&days=2"),
+        )->willReturn($responseMock->reveal());
+
+        $this->responseValidatorMock->isWeatherValid(
+            new AnyValuesToken()
+        )->willReturn(true);
+
+
+        $this->responseValidatorMock->isWeatherValid(
+            new AnyValuesToken()
+        )->willReturn(false);
+
+        $validationException = new \Exception("Test error");
+        $this->responseValidatorMock->getValidationError(
+            new AnyValuesToken()
+        )->willReturn($validationException);
+
+        $city = new City();
+        $city->setLatitude(1.2);
+        $city->setLongitude(3.4);
+
+        try {
+            $apiService->getWeather($city, 2);
+
+            // Should never execute this
+            $this->assertTrue(false);
+        } catch (\Throwable $e) {
+            $this->assertEquals("An error happened while mapping the response body -> Test error", $e->getMessage());
+        }
+    }
+
+
+
+    public function testGetWeatherUnknownErrorWhileValidatingResponse()
+    {
+
+        $apiService = $this->getWeatherApiInstance();
+
+        $responseMock = $this->prophesize(ResponseInterface::class);
+        $responseMock->getStatusCode(
+            new AnyValuesToken()
+        )->willReturn(200);
+
+        $responseBodyMock = $this->prophesize(StreamInterface::class);
+        $responseBodyMock->getContents(
+            new AnyValuesToken()
+        )->willReturn($this->getWeatherResponseString());
+        $responseMock->getBody(
+            new AnyValuesToken()
+        )->willReturn($responseBodyMock);
+
+        $this->httpClientMock->request(
+            new IdenticalValueToken("GET"),
+            new IdenticalValueToken("dummy-url?key=dummy-key&q=1.2%2C3.4&days=2"),
+        )->willReturn($responseMock->reveal());
+
+        $this->responseValidatorMock->isWeatherValid(
+            new AnyValuesToken()
+        )->willReturn(true);
+
+
+        $this->responseValidatorMock->isWeatherValid(
+            new AnyValuesToken()
+        )->willReturn(false);
+
+        $this->responseValidatorMock->getValidationError(
+            new AnyValuesToken()
+        )->willReturn(null);
+
+        $city = new City();
+        $city->setLatitude(1.2);
+        $city->setLongitude(3.4);
+
+        try {
+            $apiService->getWeather($city, 2);
+
+            // Should never execute this
+            $this->assertTrue(false);
+        } catch (\Throwable $e) {
+            $this->assertEquals("An error happened while mapping the response body -> Unknown error when validating the get weather response.", $e->getMessage());
+        }
+    }
+
+
     public function testGetWeatherSuccess()
     {
         $apiService = $this->getWeatherApiInstance();

@@ -11,6 +11,10 @@ class ResponseValidator extends BaseResponseValidator implements ResponseValidat
     /** @param City[] $cities */
     public function areCitiesOK(array $cities): bool
     {
+        if (count($cities) === 0) {
+            $this->validationError = new \Exception("Empty cities array.");
+            return false;
+        }
         foreach ($cities as $index => $city) {
             if (!$city->getName()) {
                 $this->validationError = new \Exception("City in position $index does not have a name.");
