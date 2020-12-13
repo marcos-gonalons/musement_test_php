@@ -2,7 +2,7 @@
 
 namespace App\Service\Forecast;
 
-use App\Service\Api\Musement\CitiesApiInterface;
+use App\Service\Api\Musement\CitiesAPI\CitiesApiInterface;
 use App\Service\Api\Weather\WeatherApiInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

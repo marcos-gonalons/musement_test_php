@@ -2,7 +2,7 @@
 
 namespace App\Tests\Service\Api\Musement;
 
-use App\Service\Api\Musement\CitiesApi;
+use App\Service\Api\Musement\CitiesAPI\CitiesApi;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument\Token\AnyValuesToken;

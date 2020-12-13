@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Service\Api\Musement;
+namespace App\Service\Api\Musement\CitiesAPI;
 
 use GuzzleHttp\ClientInterface;
-use App\Service\Api\Musement\Entities\City;
+use App\Service\Api\Musement\CitiesAPI\Entities\City;
 use GuzzleHttp\Utils;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,6 +41,13 @@ class CitiesApi implements CitiesApiInterface
                 $mapper->map($c, $city);
                 $cities[] = $city;
             }
+
+            /**
+             * $isValid = responseValidator->isResponseValid($cities)
+             * if (!$isValid) {
+             *  throw new \Exception("Invalid response from API -> " . $responseValidator->getError())
+             * }
+             */
 
             return $cities;
         } catch (\Throwable $e) {

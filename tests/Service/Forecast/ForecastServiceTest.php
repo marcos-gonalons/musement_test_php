@@ -2,8 +2,8 @@
 
 namespace App\Tests\Service\Forecast;
 
-use App\Service\Api\Musement\CitiesApiInterface;
-use App\Service\Api\Musement\Entities\City;
+use App\Service\Api\Musement\CitiesAPI\CitiesApiInterface;
+use App\Service\Api\Musement\CitiesAPI\Entities\City;
 use App\Service\Api\Weather\Entities\Condition;
 use App\Service\Api\Weather\Entities\Day;
 use App\Service\Api\Weather\Entities\Forecast;
