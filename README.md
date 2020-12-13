@@ -62,7 +62,7 @@ Runs **php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html coverage -
 
 
 ## Implementation
-Symfony 5 was used for this project.  
+Symfony 5 and PHP 8 were used for this project.  
 
 The code follows the PSR12 coding style standard, and is structured as follows:  
 
