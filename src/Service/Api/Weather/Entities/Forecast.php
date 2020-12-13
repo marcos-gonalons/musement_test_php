@@ -6,11 +6,11 @@ class Forecast
 {
 
     /** @var ForecastDay[] */
-    private array $forecastDay;
+    private ?array $forecastDay = null;
 
 
     /** @return ForecastDay[] */
-    public function getForecastDay(): array
+    public function getForecastDay(): ?array
     {
         return $this->forecastDay;
     }

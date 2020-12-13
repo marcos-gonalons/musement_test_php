@@ -3,6 +3,7 @@
 namespace App\Tests\Service\Api\Weather;
 
 use App\Service\Api\Musement\CitiesAPI\Entities\City;
+use App\Service\Api\Weather\ResponseValidator\ResponseValidatorInterface;
 use App\Service\Api\Weather\WeatherApi;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +21,7 @@ class WeatherApiTest extends TestCase
     private string $apiKey;
     private string $apiUrl;
     private ObjectProphecy $httpClientMock;
+    private ObjectProphecy $responseValidatorMock;
 
     public function testGetWeatherBadStatus()
     {
@@ -107,6 +109,10 @@ class WeatherApiTest extends TestCase
             new IdenticalValueToken("GET"),
             new IdenticalValueToken("dummy-url?key=dummy-key&q=1.2%2C3.4&days=2"),
         )->willReturn($responseMock->reveal());
+
+        $this->responseValidatorMock->isWeatherValid(
+            new AnyValuesToken()
+        )->willReturn(true);
 
         $city = new City();
         $city->setLatitude(1.2);
@@ -196,10 +202,12 @@ class WeatherApiTest extends TestCase
         $this->apiKey = "dummy-key";
         $this->apiUrl = "dummy-url";
         $this->httpClientMock = $this->prophesize(ClientInterface::class);
+        $this->responseValidatorMock = $this->prophesize(ResponseValidatorInterface::class);
         return new WeatherApi(
             $this->apiKey,
             $this->apiUrl,
-            $this->httpClientMock->reveal()
+            $this->httpClientMock->reveal(),
+            $this->responseValidatorMock->reveal()
         );
     }
 }

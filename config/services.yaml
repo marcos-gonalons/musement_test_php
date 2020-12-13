@@ -28,17 +28,23 @@ services:
     App\Service\Api\Musement\CitiesAPI\CitiesApiInterface: '@App\Service\Api\Musement\CitiesAPI\CitiesApi'
     App\Service\Api\Weather\WeatherApiInterface: '@App\Service\Api\Weather\WeatherApi'
 
-    # Explicit service definitions for manually wiring arguments
+    # Explicit service definitions
     App\Service\Api\Musement\CitiesAPI\CitiesApi:
         arguments:
             - '%env(CITIES_API_URL)%'
             - '@GuzzleHttp.Client'
+            - '@App\Service\Api\Musement\CitiesAPI\ResponseValidator\ResponseValidator'
+
+    App\Service\Api\Musement\CitiesAPI\ResponseValidator\ResponseValidator:
 
     App\Service\Api\Weather\WeatherApi:
         arguments:
             - '%env(WEATHER_API_KEY)%'
             - '%env(WEATHER_API_URL)%'
             - '@GuzzleHttp.Client'
+            - '@App\Service\Api\Weather\ResponseValidator\ResponseValidator'
+
+    App\Service\Api\Weather\ResponseValidator\ResponseValidator:
 
     # Vendor services
     GuzzleHttp.Client:

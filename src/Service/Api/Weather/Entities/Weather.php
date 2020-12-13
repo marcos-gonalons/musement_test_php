@@ -5,10 +5,10 @@ namespace App\Service\Api\Weather\Entities;
 class Weather
 {
 
-    private Location $location;
-    private Forecast $forecast;
+    private ?Location $location = null;
+    private ?Forecast $forecast = null;
 
-    public function getLocation(): Location
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
@@ -19,7 +19,7 @@ class Weather
         return $this;
     }
 
-    public function getForecast(): Forecast
+    public function getForecast(): ?Forecast
     {
         return $this->forecast;
     }

@@ -5,27 +5,26 @@ namespace App\Service\Api\Musement\CitiesAPI\Entities;
 class City
 {
 
-    private int $id;
-    private string $name;
-    private string $code;
-    private string $content;
-    private string $description;
-    private string $title;
-    private string $headline;
-    private string $more;
-    private int $weight;
-    private float $latitude;
-    private float $longitude;
-    private Country $country;
-    private string $coverImageUrl;
-    private string $url;
-    private int $activitiesCount;
-    private string $timezone;
-    private int $venueCount;
-    private bool $showInPopular;
+    private ?int $id = null;
+    private ?string $name = null;
+    private ?string $code = null;
+    private ?string $content = null;
+    private ?string $description = null;
+    private ?string $title = null;
+    private ?string $headline = null;
+    private ?string $more = null;
+    private ?int $weight = null;
+    private ?float $latitude = null;
+    private ?float $longitude = null;
+    private ?Country $country = null;
+    private ?string $coverImageUrl = null;
+    private ?string $url = null;
+    private ?int $activitiesCount = null;
+    private ?string $timezone = null;
+    private ?int $venueCount = null;
+    private ?bool $showInPopular = null;
 
-
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -37,7 +36,7 @@ class City
     }
 
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -49,7 +48,7 @@ class City
     }
 
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -61,7 +60,7 @@ class City
     }
 
 
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -73,7 +72,7 @@ class City
     }
 
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -85,7 +84,7 @@ class City
     }
 
 
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -97,7 +96,7 @@ class City
     }
 
 
-    public function getHeadline(): string
+    public function getHeadline(): ?string
     {
         return $this->headline;
     }
@@ -109,7 +108,7 @@ class City
     }
 
 
-    public function getMore(): string
+    public function getMore(): ?string
     {
         return $this->more;
     }
@@ -121,7 +120,7 @@ class City
     }
 
 
-    public function getWeight(): int
+    public function getWeight(): ?int
     {
         return $this->weight;
     }
@@ -133,7 +132,7 @@ class City
     }
 
 
-    public function getLatitude(): float
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
@@ -145,7 +144,7 @@ class City
     }
 
 
-    public function getLongitude(): float
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
@@ -157,7 +156,7 @@ class City
     }
 
 
-    public function getCountry(): Country
+    public function getCountry(): ?Country
     {
         return $this->country;
     }
@@ -169,7 +168,7 @@ class City
     }
 
 
-    public function getCoverImageUrl(): string
+    public function getCoverImageUrl(): ?string
     {
         return $this->coverImageUrl;
     }
@@ -181,7 +180,7 @@ class City
     }
 
 
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -192,7 +191,7 @@ class City
         return $this;
     }
 
-    public function getActivitiesCount(): int
+    public function getActivitiesCount(): ?int
     {
         return $this->activitiesCount;
     }
@@ -204,7 +203,7 @@ class City
     }
 
 
-    public function getTimezone(): string
+    public function getTimezone(): ?string
     {
         return $this->timezone;
     }
@@ -216,7 +215,7 @@ class City
     }
 
 
-    public function getVenueCount(): int
+    public function getVenueCount(): ?int
     {
         return $this->venueCount;
     }
@@ -228,7 +227,7 @@ class City
     }
 
 
-    public function getShowInPopular(): bool
+    public function getShowInPopular(): ?bool
     {
         return $this->showInPopular;
     }

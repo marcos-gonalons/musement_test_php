@@ -4,6 +4,7 @@ namespace App\Service\Api\Musement\CitiesAPI;
 
 use GuzzleHttp\ClientInterface;
 use App\Service\Api\Musement\CitiesAPI\Entities\City;
+use App\Service\Api\Musement\CitiesAPI\ResponseValidator\ResponseValidatorInterface;
 use GuzzleHttp\Utils;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,11 +13,16 @@ class CitiesApi implements CitiesApiInterface
 
     private string $url;
     private ClientInterface $httpClient;
+    private ResponseValidatorInterface $responseValidator;
 
-    public function __construct(string $url, ClientInterface $httpClient)
-    {
+    public function __construct(
+        string $url,
+        ClientInterface $httpClient,
+        ResponseValidatorInterface $responseValidator
+    ) {
         $this->url = $url;
         $this->httpClient = $httpClient;
+        $this->responseValidator = $responseValidator;
     }
 
     /**
@@ -32,6 +38,7 @@ class CitiesApi implements CitiesApiInterface
         }
 
         try {
+            /** @var \stdClass[] $decodedBody */
             $decodedBody = Utils::jsonDecode($response->getBody()->getContents());
 
             $cities = [];
@@ -42,12 +49,14 @@ class CitiesApi implements CitiesApiInterface
                 $cities[] = $city;
             }
 
-            /**
-             * $isValid = responseValidator->isResponseValid($cities)
-             * if (!$isValid) {
-             *  throw new \Exception("Invalid response from API -> " . $responseValidator->getError())
-             * }
-             */
+            $areCitiesOk = $this->responseValidator->areCitiesOK($cities);
+            if (!$areCitiesOk) {
+                $error = $this->responseValidator->getValidationError();
+                if ($error !== null) {
+                    throw $error;
+                }
+                throw new \Exception("Unknown error when validating the get cities response.");
+            }
 
             return $cities;
         } catch (\Throwable $e) {

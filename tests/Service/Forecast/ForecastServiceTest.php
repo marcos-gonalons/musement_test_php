@@ -32,11 +32,12 @@ class ForecastServiceTest extends TestCase
         $forecastService = $this->getForecastServiceInstance();
 
         $city = new City();
+        $city->setName("Test city");
         $this->citiesApiMock->getCities(
             new AnyValuesToken()
         )->willReturn([$city]);
 
-        $weather = $this->getMockedWeather("Test city", "Sunny", "Cloudy");
+        $weather = $this->getMockedWeather("Sunny", "Cloudy");
 
         $this->weatherApiMock->getWeather(
             new IdenticalValueToken($city),
@@ -53,11 +54,8 @@ class ForecastServiceTest extends TestCase
     }
 
 
-    private function getMockedWeather(string $cityName, string $weatherDay1, string $weatherDay2): Weather
+    private function getMockedWeather(string $weatherDay1, string $weatherDay2): Weather
     {
-        $location = new Location();
-        $location->setName($cityName);
-
         $forecast = new Forecast();
 
         $forecastDay1 = new ForecastDay();
@@ -79,8 +77,6 @@ class ForecastServiceTest extends TestCase
         $forecast->setForecastDay([$forecastDay1, $forecastDay2]);
 
         $weather = new Weather();
-
-        $weather->setLocation($location);
         $weather->setForecast($forecast);
 
         return $weather;

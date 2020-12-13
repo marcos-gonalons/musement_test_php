@@ -5,12 +5,12 @@ namespace App\Service\Api\Weather\Entities;
 class ForecastDay
 {
 
-    private string $date;
-    private string $dateEpoch;
-    private Day $day;
+    private ?string $date = null;
+    private ?string $dateEpoch = null;
+    private ?Day $day = null;
 
 
-    public function getDate(): string
+    public function getDate(): ?string
     {
         return $this->date;
     }
@@ -21,7 +21,7 @@ class ForecastDay
         return $this;
     }
 
-    public function getDateEpoch(): string
+    public function getDateEpoch(): ?string
     {
         return $this->dateEpoch;
     }
@@ -32,7 +32,7 @@ class ForecastDay
         return $this;
     }
 
-    public function getDay(): Day
+    public function getDay(): ?Day
     {
         return $this->day;
     }

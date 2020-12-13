@@ -5,12 +5,12 @@ namespace App\Service\Api\Musement\CitiesAPI\Entities;
 class Country
 {
 
-    private int $id;
-    private string $name;
-    private string $isoCode;
+    private ?int $id = null;
+    private ?string $name = null;
+    private ?string $isoCode = null;
 
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -22,7 +22,7 @@ class Country
     }
 
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -34,7 +34,7 @@ class Country
     }
 
 
-    public function getIsoCode(): string
+    public function getIsoCode(): ?string
     {
         return $this->isoCode;
     }

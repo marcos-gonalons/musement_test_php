@@ -5,17 +5,17 @@ namespace App\Service\Api\Weather\Entities;
 class Location
 {
 
-    private string $name;
-    private string $region;
-    private string $country;
-    private float $latitude;
-    private float $longitude;
-    private string $timezone;
-    private int $localtimeEpoch;
-    private string $localtime;
+    private ?string $name = null;
+    private ?string $region = null;
+    private ?string $country = null;
+    private ?float $latitude = null;
+    private ?float $longitude = null;
+    private ?string $timezone = null;
+    private ?int $localtimeEpoch = null;
+    private ?string $localtime = null;
 
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -27,7 +27,7 @@ class Location
     }
 
 
-    public function getRegion(): string
+    public function getRegion(): ?string
     {
         return $this->region;
     }
@@ -39,7 +39,7 @@ class Location
     }
 
 
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -51,7 +51,7 @@ class Location
     }
 
 
-    public function getLatitude(): float
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
@@ -62,7 +62,7 @@ class Location
         return $this;
     }
 
-    public function getLongitude(): float
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
@@ -74,7 +74,7 @@ class Location
     }
 
 
-    public function getTimezone(): string
+    public function getTimezone(): ?string
     {
         return $this->timezone;
     }
@@ -86,7 +86,7 @@ class Location
     }
 
 
-    public function getLocaltimeEpoch(): int
+    public function getLocaltimeEpoch(): ?int
     {
         return $this->localtimeEpoch;
     }
@@ -98,7 +98,7 @@ class Location
     }
 
 
-    public function getLocaltime(): string
+    public function getLocaltime(): ?string
     {
         return $this->localtime;
     }

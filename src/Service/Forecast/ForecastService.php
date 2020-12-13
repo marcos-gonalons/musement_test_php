@@ -3,6 +3,11 @@
 namespace App\Service\Forecast;
 
 use App\Service\Api\Musement\CitiesAPI\CitiesApiInterface;
+use App\Service\Api\Weather\Entities\Condition;
+use App\Service\Api\Weather\Entities\Day;
+use App\Service\Api\Weather\Entities\Forecast;
+use App\Service\Api\Weather\Entities\ForecastDay;
+use App\Service\Api\Weather\Entities\Weather;
 use App\Service\Api\Weather\WeatherApiInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -29,11 +34,32 @@ class ForecastService implements ForecastServiceInterface
 
         foreach ($cities as $city) {
             $weather = $this->weatherApi->getWeather($city, static::FORECAST_DAYS);
-            $output->writeln("" .
-                "Processed city " . $weather->getLocation()->getName() . " | " .
-                $weather->getForecast()->getForecastDay()[0]->getDay()->getCondition()->getText() . " - " .
-                $weather->getForecast()->getForecastDay()[1]->getDay()->getCondition()->getText() .
-                "");
+            [$conditionToday, $conditionTomorrow] = $this->getWeatherConditions($weather);
+            $output->writeln("Processed city {$city->getName()} | $conditionToday - $conditionTomorrow");
         }
+    }
+
+    /** @return string[] */
+    private function getWeatherConditions(Weather $weather): array
+    {
+        /** @var Forecast $forecast */
+        $forecast = $weather->getForecast();
+
+        /** @var string[] $conditions */
+        $conditions = [];
+
+        /** @var ForecastDay[] $forecastDays */
+        $forecastDays = $forecast->getForecastDay();
+        foreach ($forecastDays as $forecastDay) {
+            /** @var Day $day */
+            $day = $forecastDay->getDay();
+
+            /** @var Condition $condition */
+            $condition = $day->getCondition();
+
+            $conditions[] = $condition->getText() ?? "Unknown";
+        }
+
+        return $conditions;
     }
 }

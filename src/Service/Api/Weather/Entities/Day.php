@@ -5,28 +5,28 @@ namespace App\Service\Api\Weather\Entities;
 class Day
 {
 
-    private Condition $condition;
-    private float $maxTempC;
-    private float $maxTempF;
-    private float $minTempC;
-    private float $minTempF;
-    private float $avgTempC;
-    private float $avgTempF;
-    private float $maxWindMph;
-    private float $maxWindKph;
-    private float $totalPrecipMm;
-    private float $totalPrecipIn;
-    private float $avgVisKm;
-    private float $avgVisMiles;
-    private float $avgHumidity;
-    private float $dailyWillItRain;
-    private float $dailyChanceOfRain;
-    private float $dailyWillItSnow;
-    private float $dailyChanceOfSnow;
-    private float $uv;
+    private ?Condition $condition = null;
+    private ?float $maxTempC = null;
+    private ?float $maxTempF = null;
+    private ?float $minTempC = null;
+    private ?float $minTempF = null;
+    private ?float $avgTempC = null;
+    private ?float $avgTempF = null;
+    private ?float $maxWindMph = null;
+    private ?float $maxWindKph = null;
+    private ?float $totalPrecipMm = null;
+    private ?float $totalPrecipIn = null;
+    private ?float $avgVisKm = null;
+    private ?float $avgVisMiles = null;
+    private ?float $avgHumidity = null;
+    private ?float $dailyWillItRain = null;
+    private ?float $dailyChanceOfRain = null;
+    private ?float $dailyWillItSnow = null;
+    private ?float $dailyChanceOfSnow = null;
+    private ?float $uv = null;
 
 
-    public function getCondition(): Condition
+    public function getCondition(): ?Condition
     {
         return $this->condition;
     }
@@ -37,7 +37,7 @@ class Day
         return $this;
     }
 
-    public function getMaxTempC(): float
+    public function getMaxTempC(): ?float
     {
         return $this->maxTempC;
     }
@@ -48,7 +48,7 @@ class Day
         return $this;
     }
 
-    public function getMaxTempF(): float
+    public function getMaxTempF(): ?float
     {
         return $this->maxTempF;
     }
@@ -59,7 +59,7 @@ class Day
         return $this;
     }
 
-    public function getMinTempC(): float
+    public function getMinTempC(): ?float
     {
         return $this->minTempC;
     }
@@ -70,7 +70,7 @@ class Day
         return $this;
     }
 
-    public function getMinTempF(): float
+    public function getMinTempF(): ?float
     {
         return $this->minTempF;
     }
@@ -81,7 +81,7 @@ class Day
         return $this;
     }
 
-    public function getAvgTempC(): float
+    public function getAvgTempC(): ?float
     {
         return $this->avgTempC;
     }
@@ -92,7 +92,7 @@ class Day
         return $this;
     }
 
-    public function getAvgTempF(): float
+    public function getAvgTempF(): ?float
     {
         return $this->avgTempF;
     }
@@ -104,7 +104,7 @@ class Day
     }
 
 
-    public function getMaxWindMph(): float
+    public function getMaxWindMph(): ?float
     {
         return $this->maxWindMph;
     }
@@ -116,7 +116,7 @@ class Day
     }
 
 
-    public function getMaxWindKph(): float
+    public function getMaxWindKph(): ?float
     {
         return $this->maxWindKph;
     }
@@ -128,7 +128,7 @@ class Day
     }
 
 
-    public function getTotalPrecipMm(): float
+    public function getTotalPrecipMm(): ?float
     {
         return $this->totalPrecipMm;
     }
@@ -140,7 +140,7 @@ class Day
     }
 
 
-    public function getTotalPrecipIn(): float
+    public function getTotalPrecipIn(): ?float
     {
         return $this->totalPrecipIn;
     }
@@ -152,7 +152,7 @@ class Day
     }
 
 
-    public function getAvgVisKm(): float
+    public function getAvgVisKm(): ?float
     {
         return $this->avgVisKm;
     }
@@ -164,7 +164,7 @@ class Day
     }
 
 
-    public function getAvgVisMiles(): float
+    public function getAvgVisMiles(): ?float
     {
         return $this->avgVisMiles;
     }
@@ -176,7 +176,7 @@ class Day
     }
 
 
-    public function getAvgHumidity(): float
+    public function getAvgHumidity(): ?float
     {
         return $this->avgHumidity;
     }
@@ -188,7 +188,7 @@ class Day
     }
 
 
-    public function getDailyWillItRain(): float
+    public function getDailyWillItRain(): ?float
     {
         return $this->dailyWillItRain;
     }
@@ -200,7 +200,7 @@ class Day
     }
 
 
-    public function getDailyChanceOfRain(): float
+    public function getDailyChanceOfRain(): ?float
     {
         return $this->dailyChanceOfRain;
     }
@@ -212,7 +212,7 @@ class Day
     }
 
 
-    public function getDailyWillItSnow(): float
+    public function getDailyWillItSnow(): ?float
     {
         return $this->dailyWillItSnow;
     }
@@ -224,7 +224,7 @@ class Day
     }
 
 
-    public function getDailyChanceOfSnow(): float
+    public function getDailyChanceOfSnow(): ?float
     {
         return $this->dailyChanceOfSnow;
     }
@@ -236,7 +236,7 @@ class Day
     }
 
 
-    public function getUv(): float
+    public function getUv(): ?float
     {
         return $this->uv;
     }

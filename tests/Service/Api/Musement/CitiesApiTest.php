@@ -3,6 +3,7 @@
 namespace App\Tests\Service\Api\Musement;
 
 use App\Service\Api\Musement\CitiesAPI\CitiesApi;
+use App\Service\Api\Musement\CitiesAPI\ResponseValidator\ResponseValidatorInterface;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument\Token\AnyValuesToken;
@@ -19,6 +20,7 @@ class CitiesApiTest extends TestCase
 
     private string $apiUrl;
     private ObjectProphecy $httpClientMock;
+    private ObjectProphecy $responseValidatorMock;
 
 
     public function testGetCitiesBadStatus()
@@ -101,6 +103,10 @@ class CitiesApiTest extends TestCase
             new IdenticalValueToken($this->apiUrl),
         )->willReturn($responseMock->reveal());
 
+        $this->responseValidatorMock->areCitiesOK(
+            new AnyValuesToken()
+        )->willReturn(true);
+
         $cities = $apiService->getCities();
 
         $this->assertEquals(1, count($cities));
@@ -160,9 +166,11 @@ class CitiesApiTest extends TestCase
     {
         $this->apiUrl = "dummy";
         $this->httpClientMock = $this->prophesize(ClientInterface::class);
+        $this->responseValidatorMock = $this->prophesize(ResponseValidatorInterface::class);
         return new CitiesApi(
             $this->apiUrl,
-            $this->httpClientMock->reveal()
+            $this->httpClientMock->reveal(),
+            $this->responseValidatorMock->reveal()
         );
     }
 }
