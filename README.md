@@ -119,3 +119,8 @@ Here I added 3 environment variables:
 Secrets and passwords, like the weather api key, should not be commited in .env files.  
 I decided to leave it there since it's a free key.  
 You can use that one or you can change it with your own api key.
+
+---
+---
+*If you are going to work for TUI Musement throw a consulting company please specify the name of the company*  
+Please refer to **Angela Maria Carsi**
