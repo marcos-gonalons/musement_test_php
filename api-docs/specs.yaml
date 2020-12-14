@@ -1,0 +1,539 @@
+swagger: '2.0'
+info:
+  description: Musement Test - Marcos Gonalons
+  version: 1.0.0
+  title: Forecast API
+  contact:
+    email: m.gonalons.camps@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+- name: Forecast
+  description: Weather data
+paths:
+  /api/v3/cities/{cityId}/forecast/{day}:
+    put:
+      tags:
+      - Forecast API
+      summary: Create or update forecasts.
+      operationId: putForecast
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Forecast object
+        required: true
+        schema:
+          $ref: '#/definitions/Forecast%20Full%20Data'
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: day
+        required: true
+        in: path
+        description: Forecast day in dd-mm-yyyy format
+        type: string
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        404:
+          description: City not found
+        500:
+          description: Server error
+        201:
+          description: Forecast didn't exist and was created correctly
+        200:
+          description: Forecast already existed and was updated correctly
+          
+    delete:
+      tags:
+      - Forecast API
+      summary: Delete a forecast.
+      description: Deletes the forecast for the specified day.
+      operationId: deleteForecast
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: day
+        required: true
+        in: path
+        description: Forecast day in dd-mm-yyyy format
+        type: string
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        404:
+          description: City not found or didn't have forecast for that day. Check error response for more details.
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        500:
+          description: Server error
+        200:
+          description: Forecast was deleted correctly
+
+
+  /api/v3/cities/{cityId}/forecast:
+    delete:
+      tags:
+      - Forecast API
+      summary: Delete a forecast.
+      description: Deletes all the available forecasts for the city.
+      operationId: deleteForecastFull
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        404:
+          description: City not found
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        500:
+          description: Server error
+        200:
+          description: Forecast was deleted correctly
+         
+  /api/v3/cities/{cityId}/forecast/full/{day}: 
+    get:
+      tags:
+      - Forecast API
+      summary: Get the full forecast data
+      description: Gets the full forecast data object for the specified day.
+      operationId: getFullForecastDay
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: day
+        required: true
+        in: path
+        description: Forecast day in dd-mm-yyyy format
+        type: string
+      - name: temperature_scale
+        required: false
+        in: query
+        type: string
+        description: Accepts C, F or K. If omitted, C is assumed.
+      - name: speed_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mph or kph. If omitted, kph is assumed.
+      - name: pressure_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mb or in. If omitted, mb is assumed.
+      - name: precipitation_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mm or in. If omitted, mm is assumed.
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+        404:
+          description: City not found or didn't have forecast for that day. Check error response for more details.
+        500:
+          description: Server error
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Forecast%20Full%20Data'
+            
+  /api/v3/cities/{cityId}/forecast/full/{day}/{hour}: 
+    get:
+      tags:
+      - Forecast API
+      summary: Get the full forecast data
+      description: Gets the full forecast data object for a specific hour in a specific day.
+      operationId: getFullForecastHour
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: day
+        required: true
+        in: path
+        description: Forecast day in dd-mm-yyyy format
+        type: string
+      - name: hour
+        required: true
+        in: path
+        description: Hour of the day, starting from 0 to 23.
+        type: number
+        format: int
+      - name: temperature_scale
+        required: false
+        in: query
+        type: string
+        description: Accepts C, F or K. If omitted, C is assumed.
+      - name: speed_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mph or kph. If omitted, kph is assumed.
+      - name: pressure_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mb or in. If omitted, mb is assumed.
+      - name: precipitation_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mm or in. If omitted, mm is assumed.
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+        404:
+          description: City not found or didn't have forecast for that day. Check error response for more details.
+        500:
+          description: Server error
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Forecast%20Hourly%20Data'
+            
+
+         
+  /api/v3/cities/{cityId}/forecast/full: 
+    get:
+      tags:
+      - Forecast API
+      summary: Get the full forecast data
+      description: Gets the full forecast available data, starting from today to the last available day for the city
+      operationId: getFullForecast
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: temperature_scale
+        required: false
+        in: query
+        type: string
+        description: Accepts C, F or K. If omitted, C is assumed.
+      - name: speed_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mph or kph. If omitted, kph is assumed.
+      - name: pressure_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mb or in. If omitted, mb is assumed.
+      - name: precipitation_units
+        required: false
+        in: query
+        type: string
+        description: Accepts mm or in. If omitted, mm is assumed.
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        404:
+          description: City not found
+        500:
+          description: Server error
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Forecast%20Full%20Data'
+            
+            
+         
+  /api/v3/cities/{cityId}/forecast/short/{day}: 
+    get:
+      tags:
+      - Forecast API
+      summary: Get the short forecast data
+      description: Gets the short forecast data object for the specified day.
+      operationId: getShortForecastDay
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: day
+        required: true
+        in: path
+        description: Forecast day in dd-mm-yyyy format
+        type: string
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+        404:
+          description: City not found or didn't have forecast for that day. Check error response for more details.
+        500:
+          description: Server error
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Forecast%20Short%20Data'
+            
+            
+  /api/v3/cities/{cityId}/forecast/short: 
+    get:
+      tags:
+      - Forecast API
+      summary: Get the short forecast data
+      description: Gets the short forecast available data, starting from today to the last available day for the city
+      operationId: getShortForecast
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+          schema:
+            $ref: '#/definitions/Error%20Response'
+        404:
+          description: City not found
+        500:
+          description: Server error
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Forecast%20Short%20Data'
+
+         
+  /api/v3/cities/{cityId}/forecast/short/{day}/{hour}: 
+    get:
+      tags:
+      - Forecast API
+      summary: Get the short forecast data
+      description: Gets the short forecast data object for a specific hour in a specific day.
+      operationId: getShortForecastHour
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: City ID
+        required: true
+        type: integer
+        format: int64
+      - name: day
+        required: true
+        in: path
+        description: Forecast day in dd-mm-yyyy format
+        type: string
+      - name: hour
+        required: true
+        in: path
+        description: Hour of the day, starting from 0 to 23.
+        type: number
+        format: int
+      responses:
+        400:
+          description: Invalid request, client must check error message for details
+        404:
+          description: City not found or didn't have forecast for that day. Check error response for more details.
+        500:
+          description: Server error
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Forecast%20Short%20Data'
+
+definitions:
+  Forecast Full Data:
+    type: object
+    properties:
+      day:
+        type: object
+        properties:
+          date:
+            type: string
+            example: 16-12-2021
+          condition:
+            type: string
+            example: Sunny
+          maxTemperature:
+            type: number
+            format: float
+            example: 9.8
+          minTemperature:
+            type: number
+            format: float
+            example: -2.5
+          avgTemperature:
+            type: number
+            format: float
+            example: 5
+          maxWindSpeed:
+            type: number
+            format: float
+            example: 12.6
+          totalPrecipitation:
+            type: number
+            format: float
+            example: 1.5
+          avgHumidity:
+            type: number
+            format: float
+            example: 56.3
+          chanceOfRain:
+            type: number
+            format: float
+            example: 1.99
+          chanceOfSnow:
+            type: number
+            format: float
+            example: 0
+
+      hours:
+        type: array
+        items:
+          $ref: '#/definitions/Forecast%20Hourly%20Data'
+
+  Error Response:
+    type: object
+    properties:
+      error_code:
+        type: integer
+        format: int64
+      error_message:
+        type: string
+  Forecast Short Data:
+    type: object
+    properties:
+      timestamp:
+        type: integer
+        format: int64
+        example: 1607644800
+      condition:
+        type: string
+        example: Sunny
+  Forecast Hourly Data:
+    type: object
+    properties:
+      timestamp:
+        type: integer
+        format: int64
+        example: 1607644800
+      condition:
+        type: string
+        example: Partly Cloudly
+      temperature:
+        type: number
+        format: float
+        example: 9.8
+      windSpeed:
+        type: number
+        format: float
+        example: 11.9
+      windDegree:
+        type: number
+        format: float
+        example: 123
+      windDir:
+        type: string
+        example: N
+      pressure:
+        type: number
+        format: float
+        example: 156.9
+      precipitation:
+        type: number
+        format: float
+        example: 0.0
+      humidity:
+        type: number
+        format: float
+        example: 86.1
+      feelsLike:
+        type: number
+        format: float
+        example: 8
+      windChill:
+        type: number
+        format: float
+        example: -5
+      heatIndex:
+        type: number
+        format: float
+        example: 60
+      dewPoint:
+        type: number
+        format: float
+        example: 9.8
+      chanceOfRain:
+        type: number
+        format: float
+        example: 0.0
+      chanceOfSnow:
+        type: number
+        format: float
+        example: 99.99
+      gust:
+        type: number
+        format: float
+        example: 16.8
+
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /mgonalons/musement-test/1.0.0
+schemes:
+ - https
+ - http

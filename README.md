@@ -1,5 +1,11 @@
 # Musement Test by Marcos Goñalons
 
+
+---
+*If you are going to work for TUI Musement throw a consulting company please specify the name of the company*  
+Please refer to **Angela Maria Carsi**
+
+---
 ## Needed tools
 In order to run the app, only Docker is necessary.
 
@@ -120,7 +126,7 @@ Secrets and passwords, like the weather api key, should not be commited in .env 
 I decided to leave it there since it's a free key.  
 You can use that one or you can change it with your own api key.
 
----
----
-*If you are going to work for TUI Musement throw a consulting company please specify the name of the company*  
-Please refer to **Angela Maria Carsi**
+## API Design (Step 2 of the test)
+Please check the folder api-docs. Open the index.html file in the browser to check the endpoints, payloads, responses, etc.  
+You can also find there the specs.yaml file with the OpenAPI specs if you want to check it in Swagger's site
+
