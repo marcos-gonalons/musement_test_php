@@ -35,3 +35,4 @@ _tests:
 tests-coverage: cleanup-tmp-container create-tmp-container _tests-coverage cleanup-tmp-container
 _tests-coverage:
 	@-docker run --name $(CONTAINER_NAME)-tmp --entrypoint=/bin/bash $(IMAGE_NAME)-tmp -c "php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html coverage --whitelist src"
+	docker cp $(CONTAINER_NAME)-tmp:/app/coverage ./coverage
